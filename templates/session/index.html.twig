@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <title>Cv</title>
+</head>
+<body>
+<div class="container">
+    {% for successMessage in app.session.flashBag.get('success') %}
+        <div class="alert alert-dark">
+            {{ successMessage }}
+        </div>
+    {% endfor %}
+    {% if app.session.get('nbreVisite') == 1 %}
+        <div class="alert alert-info">
+            C'est votre première visite bienvenu.
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            Merci de votre fidélité. C'est votre visite numéro {{ app.session.get('nbreVisite') }}
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>
