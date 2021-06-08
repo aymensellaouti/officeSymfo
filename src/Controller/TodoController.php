@@ -53,4 +53,58 @@ class TodoController extends AbstractController
         }
         return $this->redirectToRoute('todo');
     }
+
+    /**
+     * @Route("/todo/update/{name}/{description}", name="todo.update")
+     */
+    public function updateTodo(SessionInterface $session, $name, $description) {
+        // Je vérifie si la session existe
+        // si oui
+        if ($session->has('todos')) {
+            $todos = $session->get('todos');
+            // je vérifie s'il existe un todo de la même clé
+            if (!isset($todos[$name])) {
+                // si non
+                // message erreur
+                $this->addFlash('error', "Le todo de clé $name n'existe pas");
+            } else {
+                // si oui
+                // on la met à jour + message success
+                $todos[$name] = $description;
+                $session->set('todos', $todos);
+                $this->addFlash('success', "Le todo de clé $name a été mis à jour avec succès");
+            }
+            // si non
+        } else {
+            $this->addFlash('error', "La session n'est pas encore initialisée");
+        }
+        return $this->redirectToRoute('todo');
+    }
+
+    /**
+     * @Route("/todo/delete/{name}", name="todo.delete")
+     */
+    public function deleteTodo(SessionInterface $session, $name) {
+        // Je vérifie si la session existe
+        // si oui
+        if ($session->has('todos')) {
+            $todos = $session->get('todos');
+            // je vérifie s'il existe un todo de la même clé
+            if (!isset($todos[$name])) {
+                // si non
+                // message erreur
+                $this->addFlash('error', "Le todo de clé $name n'existe pas");
+            } else {
+                // si oui
+                // on la met à jour + message success
+                unset($todos[$name]);
+                $session->set('todos', $todos);
+                $this->addFlash('success', "Le todo de clé $name a été supprimé avec succès");
+            }
+            // si non
+        } else {
+            $this->addFlash('error', "La session n'est pas encore initialisée");
+        }
+        return $this->redirectToRoute('todo');
+    }
 }
