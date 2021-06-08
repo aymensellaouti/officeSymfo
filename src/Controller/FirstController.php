@@ -20,7 +20,7 @@ class FirstController extends AbstractController
     }
 
     /**
-     * @Route("/cv/{name}/{firstname}/{age}/{section}", name="cv")
+     * @Route("/cv/{name}/{firstname}/{age<[-]?\d{1,2}>}/{section<GL|RT>?GL}", name="cv")
      */
     public function cv($name, $firstname, $age, $section) {
         return $this->render('cv/cv.html.twig', [
@@ -45,6 +45,17 @@ class FirstController extends AbstractController
             $session->set('nbreVisite', 1);
         }
         return $this->render('session/index.html.twig');
+    }
+
+    /**
+     * @Route("/randomtab/{nbre<\d{1,2}>?5}")
+     */
+    public function showRandomTab($nbre) {
+        $notes = [];
+        for ($i=0; $i < $nbre; $i++) {
+            $notes[$i] = rand(0,20);
+        }
+        return $this->render('tab/randomTab.html.twig', ['notes' => $notes]);
     }
 
 }

@@ -7,10 +7,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class TodoController
+ * @package App\Controller
+ * @Route("/todo")
+ */
 class TodoController extends AbstractController
 {
     /**
-     * @Route("/todo", name="todo")
+     * @Route("/", name="todo")
      */
     public function index(SessionInterface $session): Response
     {
@@ -28,7 +33,7 @@ class TodoController extends AbstractController
     }
 
     /**
-     * @Route("/todo/add/{name}/{description}", name="todo.add")
+     * @Route("/add/{name?defaultName}/{description<\d+>?defaultDEscription}", name="todo.add")
      */
     public function addTodo(SessionInterface $session, $name, $description) {
         // Je vérifie si la session existe
@@ -55,7 +60,7 @@ class TodoController extends AbstractController
     }
 
     /**
-     * @Route("/todo/update/{name}/{description}", name="todo.update")
+     * @Route("/update/{name}/{description}", name="todo.update")
      */
     public function updateTodo(SessionInterface $session, $name, $description) {
         // Je vérifie si la session existe
@@ -82,7 +87,7 @@ class TodoController extends AbstractController
     }
 
     /**
-     * @Route("/todo/delete/{name}", name="todo.delete")
+     * @Route("/delete/{name}", name="todo.delete")
      */
     public function deleteTodo(SessionInterface $session, $name) {
         // Je vérifie si la session existe

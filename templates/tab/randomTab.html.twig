@@ -10,17 +10,25 @@
 </head>
 <body>
 <div class="container">
-    <div class="card text-center">
-        <div class="card-header">
-            {{ firstname | title }} {{ name | upper }}
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">{{ age | abs }}</h5>
-            <p class="card-text">{{ section }}.</p>
-        </div>
-        <div class="card-footer text-muted">
-            J'ai {{ age }} ans
-        </div>
+    <table class="table">
+        <tr>
+            <th>Notes</th>
+        </tr>
+
+   {% for note in notes%}
+       <tr>
+           <td>{{ note }}</td>
+       </tr>
+   {% endfor %}
+    </table>
+    <div class="alert alert-info">
+        Nombre des notes : {{ notes | length }}
+    </div>
+    <div class="alert alert-danger">
+        Note minimale : {{ min(notes) }}
+    </div>
+    <div class="alert alert-success">
+        Note maximale : {{ max(notes) }}
     </div>
 </div>
 </body>
