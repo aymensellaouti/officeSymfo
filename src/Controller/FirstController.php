@@ -57,5 +57,11 @@ class FirstController extends AbstractController
         }
         return $this->render('tab/randomTab.html.twig', ['notes' => $notes]);
     }
+    /**
+     * @Route("/heritage")
+     */
+    public function heritage() {
+        return $this->render('fils.html.twig');
+    }
 
 }
