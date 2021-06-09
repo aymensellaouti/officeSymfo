@@ -1,0 +1,15 @@
+<table class="table">
+{% for  object in tab %}
+    <tr class="
+    {% if(loop.index is even) %}
+                table-danger
+            {% else  %}
+                table-warning
+            {% endif %}
+    ">
+    {% for property, value in object %}
+        <td>{{ value }}</td>
+    {% endfor %}
+    </tr>
+{% endfor %}
+</table>

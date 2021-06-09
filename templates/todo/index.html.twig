@@ -1,15 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
-    <title>Todos</title>
-</head>
-<body>
-<div class="container">
+{% extends 'layout.html.twig' %}
+{% block body %}
     {% for message in app.session.flashBag.get('success') %}
         <div class="alert alert-success">
             {{ message }}
@@ -29,9 +19,8 @@
     {% for todoName, todoDescription in app.session.get('todos') %}
         <li class="list-group-item">
             {{ todoName }} : {{ todoDescription }}
+            <a href="{{ path('todo.delete', {'name': todoName}) }}">Delete</a>
         </li>
     {% endfor %}
     </ol>
-</div>
-</body>
-</html>
+{% endblock %}

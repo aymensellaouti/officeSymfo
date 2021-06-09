@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Model\Personne;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -64,4 +65,26 @@ class FirstController extends AbstractController
         return $this->render('fils.html.twig');
     }
 
+    /**
+     * @Route("/inclusion")
+     */
+    public function inclusion() {
+
+        $personnes = [
+            $this->convertObjectToTab(new Personne('houda', 'houda', 25)),
+            $this->convertObjectToTab(new Personne('aymen', 'aymen', 35)),
+            $this->convertObjectToTab(new Personne('wassef', 'wassef', 45)),
+        ];
+        return $this->render('inclusion.html.twig', [
+            'personnes' => $personnes
+        ]);
+    }
+
+    private function convertObjectToTab($objet): array {
+        $newArray = [];
+        foreach ($objet as $key => $value ){
+            $newArray[$key] = $value;
+        }
+        return $newArray;
+    }
 }

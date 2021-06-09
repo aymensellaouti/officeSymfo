@@ -33,7 +33,7 @@ class TodoController extends AbstractController
     }
 
     /**
-     * @Route("/add/{name?defaultName}/{description<\d+>?defaultDEscription}", name="todo.add")
+     * @Route("/add/{name?defaultName}/{description?defaultDEscription}", name="todo.add")
      */
     public function addTodo(SessionInterface $session, $name, $description) {
         // Je vérifie si la session existe
