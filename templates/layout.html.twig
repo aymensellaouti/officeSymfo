@@ -120,6 +120,22 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
+
+                {% for message in app.session.flashBag.get('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.session.flashBag.get('error') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for key, message in app.session.flashBag.get('info') %}
+                    <div class="alert alert-info">
+                        {{  message }}
+                    </div>
+                {% endfor %}
                 {% block body %}
                 {% endblock %}
             </div>
