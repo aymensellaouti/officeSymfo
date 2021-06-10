@@ -21,8 +21,8 @@ class TodoDBController extends AbstractController
     {
         //Création de l'objet
         $todo = new Todo();
-        $todo->setName($name);
-        $todo->setDescription($description);
+        $todo->setName($name)
+             ->setDescription($description);
         $todo2 = new Todo();
         $todo2->setName($name.' second');
         $todo2->setDescription($description.' second');
@@ -39,13 +39,31 @@ class TodoDBController extends AbstractController
     }
 
     /**
-     * @Route("/list", name= "tododb.list")
+     * @Route("/list/{page?1}/{nbre?8}", name= "tododb.list")
      */
-    public function showAlltodos() {
-        $repository = $this->getDoctrine()->getRepository(Todo::class);
-        $todos = $repository->findAll();
+    public function showAlltodos($page, $nbre) {
 
-        return $this->render('todo_db/index.html.twig', ['todos' => $todos]);
+        $repository = $this->getDoctrine()->getRepository(Todo::class);
+        dd($repository->getAllTodosByStatus(['En Cours', 'Annulée']));
+        $nbreTodo = $repository->count([]);
+        $todos = $repository->findBy(
+            [],
+            [],
+            $nbre,
+            ($page - 1) * $nbre
+        );
+
+        $nbrePage = ($nbreTodo%$nbre === 0)?$nbreTodo / $nbre : ceil($nbreTodo / $nbre) ;
+//        $previous = ($page == 1)? $page : $page - 1;
+//        $next = ($page == $nbrePage)? $page : $page + 1;
+        return $this->render('todo_db/index.html.twig', [
+            'todos' => $todos,
+            'nbrePages' => $nbrePage,
+            'page' => $page,
+            'nbre' => $nbre,
+//            'previous' => $previous,
+//            'next' => $next
+            ]);
     }
 
     /**

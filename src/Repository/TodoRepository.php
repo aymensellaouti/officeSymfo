@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Todo;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,25 @@ class TodoRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Todo::class);
+    }
+
+    public function getAllTodosByStatus($status) {
+        // select * from todo
+        $qb = $this->createQueryBuilder('t');
+        $qb = $this->getByStatus($qb, $status);
+        return $qb->getQuery()->getResult();
+    }
+
+
+    private function getByStatus(QueryBuilder $qb, $status) {
+        if (gettype($status) == 'array') {
+            $qb->andWhere('t.status IN (:status)')
+                ->setParameter('status', $status);
+        } else {
+            $qb->andWhere('t.status = :status')
+                ->setParameter('status', $status);
+        }
+        return $qb;
     }
 
     // /**
