@@ -25,12 +25,12 @@ class Cours
     private $designation;
 
     /**
-     * @ORM\OneToOne(targetEntity=enseignant::class, inversedBy="cours", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Enseignant::class, inversedBy="cours", cascade={"persist", "remove"})
      */
     private $enseignant;
 
     /**
-     * @ORM\ManyToMany(targetEntity=classe::class, inversedBy="cours")
+     * @ORM\ManyToMany(targetEntity=Classe::class, inversedBy="cours")
      */
     private $classe;
 

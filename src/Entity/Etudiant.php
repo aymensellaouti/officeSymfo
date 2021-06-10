@@ -23,7 +23,7 @@ class Etudiant
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=classe::class, inversedBy="etudiants")
+     * @ORM\ManyToOne(targetEntity=Classe::class, inversedBy="etudiants")
      */
     private $classe;
 
