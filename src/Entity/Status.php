@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Status
 {
+    const DEFAULT_STATUS = 'En attente';
 
     use TimeStampTrait;
 

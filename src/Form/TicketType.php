@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Departement;
+use App\Entity\Status;
 use App\Entity\Ticket;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,8 +20,20 @@ class TicketType extends AbstractType
             ->add('description')
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('status')
-            ->add('departements')
+            ->add('status', EntityType::class, [
+                'class' => Status::class, 'description',
+//                'choice_label' => function (Status $status) {
+//                    return "{$status->getDescription()} - {$status->getClasse()}";
+//                },
+                'expanded' => false,
+                'multiple' => false
+            ])
+            ->add('departements', EntityType::class, [
+                'class' => Departement::class,
+                'choice_label' => 'designation',
+                'expanded' => false,
+                'multiple' => true
+            ])
             ->add('AddTicket', SubmitType::class)
         ;
     }

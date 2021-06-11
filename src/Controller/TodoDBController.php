@@ -44,7 +44,7 @@ class TodoDBController extends AbstractController
     public function showAlltodos($page, $nbre) {
 
         $repository = $this->getDoctrine()->getRepository(Todo::class);
-        dd($repository->getAllTodosByStatus(['En Cours', 'Annulée']));
+
         $nbreTodo = $repository->count([]);
         $todos = $repository->findBy(
             [],
