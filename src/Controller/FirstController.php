@@ -14,6 +14,12 @@ class FirstController extends AbstractController
 {
 
     /**
+     * @Route("/", name="home")
+     */
+    public function home() {
+        return $this->redirectToRoute('app_login');
+    }
+    /**
      * @Route("/first", name="first")
      */
     public function sayHello() {

@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class TodoController
  * @package App\Controller
- * @Route("/todo")
+ * @Route("/admin/todo")
  */
 class TodoController extends AbstractController
 {

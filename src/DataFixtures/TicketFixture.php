@@ -19,6 +19,7 @@ class TicketFixture extends Fixture implements DependentFixtureInterface
                    ->setDescription($faker->realText(50))
                    ->addDepartement($this->getReference(DepartementFixture::DEPARTEMENT_REF.$faker->numberBetween(1,20)))
                    ->setStatus($this->getReference(StatusFixture::STATUS_REF.$faker->numberBetween(1,3)))
+                   ->setOwner($this->getReference(UserFixture::STATUS_REF.$faker->numberBetween(1,10)))
             ;
             $manager->persist($ticket);
         }
@@ -29,7 +30,8 @@ class TicketFixture extends Fixture implements DependentFixtureInterface
     {
         return [
             DepartementFixture::class,
-            StatusFixture::class
+            StatusFixture::class,
+            UserFixture::class
         ];
     }
 }

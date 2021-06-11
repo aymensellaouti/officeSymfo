@@ -23,6 +23,10 @@ class StatusFixture extends Fixture
          $status2->setDescription('Affecté')->setClasse('success');
          $this->addReference(self::STATUS_REF."3", $status2);
          $manager->persist($status2);
+         $status3 = new Status();
+         $status3->setDescription(Status::DEFAULT_STATUS)->setClasse('warning');
+         $this->addReference(self::STATUS_REF."4", $status3);
+         $manager->persist($status3);
 
         $manager->flush();
     }
